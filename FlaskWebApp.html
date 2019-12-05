@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+Kredi Miktarı: <input type="text" id="miktar"><br>
+Yaş: <input type="text" id="yas"><br>
+Ev Durumu: <input type="text" id="ev"><br>
+Aldığı Kredi Sayısı: <input type="text" id="kredisayisi"><br>
+Telefon Durumu: <input type="text" id="tel"><br>
+<button id="predict-button"> Tahmin Et </button>
+<p>Prediction : <span id="prediction"></span></p>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+<script>
+$("#predict-button").click(function(){
+	let message = {
+		miktar: $("#miktar").val(),
+		yas: $("#yas").val(),
+		ev: $("#ev").val(),
+		kredisayisi: $("#kredisayisi").val(),
+		tel: $("#tel").val()
+	}
+	console.log(message);
+	$.post("http://127.0.0.1:5000/predict", JSON.stringify(message), function(response){
+	$("#prediction").text(response.prediction);
+	});
+    });
+</script>
+
+</body>
+</html>
